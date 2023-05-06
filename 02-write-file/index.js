@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const { exit } = require('process');
 
 const filePath = path.join(__dirname, 'newTextFile.txt');
 
@@ -12,12 +13,12 @@ function handleInput(data) {
   const input = data.toString().trim(); // убираем символ новой строки, иначе не будет работать "exit"
   if (input === 'exit') {
     console.log('Получена команда "exit", работа программы завершена');
-    process.exit(0); // завершаем процесс Node.js
+    exit(0); // завершаем процесс Node.js
   }
   writeStream.write(`${input}\n`);
   process.on('SIGINT', () => {
     console.log('Нажато СTRL+C. Работа программы завершена');
-    process.exit();
+    exit();
   });
 }
 
